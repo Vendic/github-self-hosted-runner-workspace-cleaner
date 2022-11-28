@@ -1,0 +1,12 @@
+name: 'Self hosted runner workspace cleaner'
+description: 'Workflow cleanup when using a self hosted Github Actions runner'
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        if [ -f "/home/runner/.ssh/id_rsa" ]; then rm /home/runner/.ssh/id_rsa; fi
+        rm -rf "${{ github.workspace }}"
+        rm -rf $HOME/.ssh
+        mkdir -p "${{ github.workspace }}"
+        echo "Cleaning up previous run"
+      shell: bash
