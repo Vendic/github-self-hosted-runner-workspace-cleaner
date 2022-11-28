@@ -4,9 +4,13 @@ runs:
   using: "composite"
   steps:
     - run: |
-        if [ -f "/home/runner/.ssh/id_rsa" ]; then rm /home/runner/.ssh/id_rsa; fi
         rm -rf "${{ github.workspace }}"
-        rm -rf $HOME/.ssh
         mkdir -p "${{ github.workspace }}"
-        echo "Cleaning up previous run"
+        echo "Cleaned up previous run"
+      shell: bash
+
+    - run: |
+        if [ -f "/home/runner/.ssh/id_rsa" ]; then rm /home/runner/.ssh/id_rsa; fi
+        rm -rf $HOME/.ssh
+        echo "Cleaned up $HOME/.ssh"
       shell: bash
